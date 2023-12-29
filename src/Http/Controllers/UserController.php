@@ -27,7 +27,7 @@ class UserController extends AdminController
             $grid->column('username');
             $grid->column('name');
             $grid->column('email');
-            $grid->column('domain.host');
+            $grid->column('domain.host_base');
 
             if (config('admin.permission.enable')) {
                 $grid->column('roles')->pluck('name')->label(StyleClassType::PRIMARY, 3);
