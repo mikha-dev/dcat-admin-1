@@ -2,10 +2,10 @@
 
 namespace Tests\Controllers;
 
-use App\Http\Controllers\Controller;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
 use Tests\Repositories\Report;
+use Illuminate\Routing\Controller;
 
 class ReportController extends Controller
 {

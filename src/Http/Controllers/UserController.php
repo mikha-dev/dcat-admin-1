@@ -5,6 +5,7 @@ namespace Dcat\Admin\Http\Controllers;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
+use D4T\Core\Models\Domain;
 use Dcat\Admin\Widgets\Tree;
 use Dcat\Admin\Support\Helper;
 use D4T\Core\Enums\StyleClassType;
@@ -133,7 +134,7 @@ class UserController extends AdminController
 
             $form->display('id', 'ID');
 
-            $domains = Domain::pluck('host', 'id');
+            $domains = Domain::pluck('host_base', 'id');
             $form->select('domain_id', trans('admin.domain'))->options($domains)->required();
 
             $form->text('username', trans('admin.username'))

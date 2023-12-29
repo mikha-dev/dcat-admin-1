@@ -4,7 +4,7 @@ namespace Dcat\Admin\Http\Controllers;
 
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Layout\Content;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Dcat\Admin\Http\Forms\AppSettingsForm;
 
 class AppSettingsController extends Controller
