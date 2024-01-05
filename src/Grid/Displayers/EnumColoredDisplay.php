@@ -3,7 +3,7 @@
 namespace Dcat\Admin\Grid\Displayers;
 
 use D4T\Core\Contracts\D4TEnum;
-use Dcat\Admin\D4TEnumColored;
+use D4T\Core\Contracts\D4TEnumColored;
 
 class EnumColoredDisplay extends AbstractDisplayer
 {
@@ -17,8 +17,8 @@ class EnumColoredDisplay extends AbstractDisplayer
         if(class_implements($this->value, D4TEnum::class) ) {
             /** @var D4TEnum $this->value */
             if(class_implements($this->value, D4TEnumColored::class) ) {
-//todo::use colored badge
-                return '<span class="label bg-'.$this->value->color()->value.'">'.$this->value->label().'</span>';
+                $color = $this->value->color()->value;
+                return '<span class="label bg-'.$color.'">'.$this->value->label().'</span>';
             }
 
             return $this->value->label();

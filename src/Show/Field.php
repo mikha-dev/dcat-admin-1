@@ -338,7 +338,8 @@ HTML;
 
                 /** @var D4TEnum $this->value */
                 if(method_exists($enumClass, 'color') ) {
-                    return '<span class="label" style="background:'.$enum->color().'">'.$label.'</span>';
+                    $color = $enum->color()->value;
+                    return "<span class='label bg-$color'>$label</span>";
                 }
 
                 return $label;

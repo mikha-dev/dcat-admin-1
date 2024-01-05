@@ -179,12 +179,12 @@ trait ModelTree
         }
     }
 
-    protected function determineOrderColumnName()
+    public function determineOrderColumnName() : string
     {
         return $this->getOrderColumn();
     }
 
-    public function moveOrderDown()
+    public function moveOrderDown() : static
     {
         $orderColumnName = $this->determineOrderColumnName();
         $parentColumnName = $this->getParentColumn();
@@ -213,7 +213,7 @@ trait ModelTree
         return $this->swapOrderWithModel($swapWithModel);
     }
 
-    public function moveOrderUp()
+    public function moveOrderUp() : static
     {
         $orderColumnName = $this->determineOrderColumnName();
         $parentColumnName = $this->getParentColumn();
@@ -255,7 +255,7 @@ trait ModelTree
             ->first();
     }
 
-    public function moveToStart()
+    public function moveToStart() : static
     {
         $parentColumnName = $this->getParentColumn();
 
