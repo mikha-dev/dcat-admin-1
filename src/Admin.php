@@ -44,6 +44,7 @@ use D4T\Core\Contracts\EmailContextObjectInterface;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Dcat\Admin\Http\Controllers\AppSettingsController;
 use Dcat\Admin\Http\Controllers\AuthenticationLogController;
+use Dcat\Admin\Http\Controllers\ControllerHelpTopicController;
 use Dcat\Admin\Http\Controllers\DashboardNotificationController;
 
 class Admin
@@ -605,6 +606,7 @@ class Admin
                 return (new AppSettingsController())->index($content);
             })->name(RouteAuth::APP_SETTINGS());
 
+            $router->resource('controller-help-topics', ControllerHelpTopicController::class)->name('index',RouteAuth::HELP_TOPICS());
             $router->resource('notifications', DashboardNotificationController::class)->name('index',RouteAuth::NOTIFICATIONS());
             $router->resource('authentication-log', AuthenticationLogController::class)->name('index',RouteAuth::AUTH_LOG());
 
