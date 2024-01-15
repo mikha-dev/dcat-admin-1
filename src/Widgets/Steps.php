@@ -9,19 +9,24 @@ class Steps implements Renderable
     protected $view = 'admin::widgets.steps';
 
     protected array $items = [];
+    protected int $activeIdx;
 
-    public function add(string $title, string $description, string $icon, bool $active = false, $id = null)
+    public function add(string $title, string $description, bool $active = false, string $icon = null, string $id = null)
     {
 
         $id = $id ?: mt_rand();
 
-        $this->items[$id] = [
+        $this->items[] = [
             'title' => $title,
             'description' => $description,
             'icon' => $icon,
-            'active' => $active,
-            'id' => $id
+            'id' => $id,
+            'index' => count($this->items) + 1
         ];
+
+        if(!$active) {
+            $this->activeIdx = count($this->items) - 1;
+        }
 
         return $this;
     }
@@ -29,6 +34,7 @@ class Steps implements Renderable
     public function render()
     {
         $data['items'] = $this->items;
+        $data['active_idx'] = $this->activeIdx;
 
         return view($this->view, $data)->render();
     }
