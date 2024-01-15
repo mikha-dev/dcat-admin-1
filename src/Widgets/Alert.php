@@ -125,7 +125,7 @@ class Alert extends Widget
      * @param  string  $icon
      * @return $this
      */
-    public function icon($icon)
+    public function icon(string $icon)
     {
         $this->icon = $icon;
 

@@ -424,11 +424,14 @@ class Asset
 
         $assets = $this->getAlias($alias, $params);
 
-        $this->js($assets['js']);
-        $this->css($assets['css']);
+        if(isset($assets['js']) && !empty($assets['js']))
+            $this->js($assets['js']);
+
+        if(isset($assets['css']) && !empty($assets['css']))
+            $this->css($assets['css']);
     }
 
-    public function css(string|array $css)
+    public function css(string|array|null $css)
     {
         if (! $css) {
             return;
