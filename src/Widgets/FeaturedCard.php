@@ -47,7 +47,7 @@ class FeaturedCard extends Widget
         return $this;
     }
 
-    public function title(string $title) : FeaturedCard
+    public function title(?string $title = null) : FeaturedCard
     {
         $this->title = $title;
 
