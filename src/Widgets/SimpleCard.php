@@ -20,7 +20,7 @@ class SimpleCard extends Widget
         $this->content($content);
     }
 
-    public function content( string|\Closure|Renderable|LazyWidget $content) : SimpleCard
+    public function content( string|\Closure|Renderable|LazyWidget|null $content = null) : SimpleCard
     {
         $this->content = $this->formatRenderable($content);
 
@@ -40,7 +40,7 @@ class SimpleCard extends Widget
         return $this;
     }
 
-    public function title(string $title) : SimpleCard
+    public function title(?string $title = null) : SimpleCard
     {
         $this->title = $title;
 
