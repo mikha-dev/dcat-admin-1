@@ -10,7 +10,7 @@ class Steps implements Renderable
     protected string $view = 'admin::widgets.steps';
 
     protected array $items = [];
-    protected int $activeIdx;
+    protected int $activeIdx = 0;
 
     public function add(string $title, string $description, bool $active = false, string $icon = null, string $id = null)
     {
@@ -25,7 +25,7 @@ class Steps implements Renderable
             'index' => count($this->items) + 1
         ];
 
-        if(!$active) {
+        if($active) {
             $this->activeIdx = count($this->items) - 1;
         }
 
