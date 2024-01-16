@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 
 class Steps implements Renderable
 {
-    protected $view = 'admin::widgets.steps';
+    protected string $view = 'admin::widgets.steps';
 
     protected array $items = [];
     protected int $activeIdx;
