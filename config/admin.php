@@ -119,6 +119,13 @@ return [
     */
     'https' => env('ADMIN_HTTPS', false),
 
+    'registration' => [
+
+        'controller' => Dcat\Admin\Http\Controllers\RegistrationController::class,
+        'recaptch-enabled' => true,
+        'activation-enabled' => true,
+        'max_attempts' => 3
+    ],
     /*
     |--------------------------------------------------------------------------
     | dcat-admin auth setting
@@ -158,6 +165,7 @@ return [
         'except' => [
             'auth/login',
             'auth/logout',
+            'auth/register',
         ],
 
         'enable_session_middleware' => false,

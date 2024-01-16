@@ -46,6 +46,7 @@ use Dcat\Admin\Http\Controllers\AppSettingsController;
 use Dcat\Admin\Http\Controllers\AuthenticationLogController;
 use Dcat\Admin\Http\Controllers\ControllerHelpTopicController;
 use Dcat\Admin\Http\Controllers\DashboardNotificationController;
+use Dcat\Admin\Http\Controllers\RegistrationController;
 
 class Admin
 {
@@ -615,12 +616,16 @@ class Admin
 
             $router->get('auth/login', $authController.'@getLogin')->name(RouteAuth::LOGIN());
             $router->post('auth/login', $authController.'@postLogin');
+
             $router->get('auth/logout', $authController.'@getLogout')->name(RouteAuth::LOGOUT());
             $router->get('auth/impersonate/{id}', $authController.'@impersonate')->name(RouteAuth::IMPERSONATE());
             $router->get('auth/deimpersonate', $authController.'@deimpersonate')->name(RouteAuth::DEIMPERSONATE());
 
             $router->get('auth/forgot-password', $authController.'@getForgotPassword')->name(RouteAuth::FORGOT_PASSWORD());
-            $router->get('auth/register', $authController.'@getRegister')->name(RouteAuth::REGISTER());
+
+            $registerController = config('admin.registration.controller', RegistrationController::class);
+            $router->get('auth/register', $registerController.'@show')->name(RouteAuth::REGISTER());
+            $router->post('auth/register', $registerController.'@store');
 
             $router->get('auth/security', $authController.'@getSecurity')->name(RouteAuth::SECURITY());
             $router->put('auth/security', $authController.'@putSecurity');

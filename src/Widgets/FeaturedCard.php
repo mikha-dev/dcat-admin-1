@@ -40,14 +40,14 @@ class FeaturedCard extends Widget
         return $this;
     }
 
-    public function footerAddElement(string|Renderable|\Closure  $content) : FeaturedCard
+    public function addFooterElement(string|Renderable|\Closure  $content) : FeaturedCard
     {
         $this->footerItems[] = $this->toString($content);;
 
         return $this;
     }
 
-    public function title(string $title) : FeaturedCard
+    public function title(?string $title = null) : FeaturedCard
     {
         $this->title = $title;
 

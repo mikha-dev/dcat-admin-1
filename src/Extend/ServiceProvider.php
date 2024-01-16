@@ -546,7 +546,6 @@ abstract class ServiceProvider extends LaravelServiceProvider
     {
         $asset = Admin::asset();
 
-        // 注册静态资源路径别名
         $asset->alias($this->getName().'.path', '@extension/'.$this->getPackageName());
 
         if ($this->js || $this->css) {
@@ -575,11 +574,7 @@ abstract class ServiceProvider extends LaravelServiceProvider
         }
     }
 
-    /**
-     * @param  string|array  $files
-     * @return mixed
-     */
-    protected function formatAssetFiles($files)
+    protected function formatAssetFiles(string|array $files) : mixed
     {
         if (is_array($files)) {
             return array_map([$this, 'formatAssetFiles'], $files);
@@ -590,6 +585,10 @@ abstract class ServiceProvider extends LaravelServiceProvider
         }
 
         return '@'.$this->getName().'.path/'.trim($files, '/');
+    }
+
+    public static function assetUrl(string $file) : string {
+        return admin_asset(static::instance()->formatAssetFiles($file));
     }
 
     /**
