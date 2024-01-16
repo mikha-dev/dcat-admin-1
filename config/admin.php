@@ -299,7 +299,7 @@ return [
         'permissions_model' => Dcat\Admin\Models\Permission::class,
 
         // Menu table and model.
-        'menu_table' => 'admin_menu',
+        'menu_table' => 'menu',
         'menu_model' => Dcat\Admin\Models\Menu::class,
 
         // Pivot table for table above.
@@ -307,9 +307,9 @@ return [
         'role_permissions_table' => 'role_permissions',
         'role_menu_table'        => 'role_menu',
         'permission_menu_table'  => 'permission_menu',
-        'settings_table'         => 'admin_settings',
-        'extensions_table'       => 'admin_extensions',
-        'extension_histories_table' => 'admin_extension_histories',
+        'settings_table'         => 'settings',
+        'extensions_table'       => 'extensions',
+        'extension_histories_table' => 'extension_histories',
         'domain_role_defaults_table' => 'domain_role_defaults'
     ],
 
