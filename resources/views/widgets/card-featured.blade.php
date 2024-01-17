@@ -1,15 +1,20 @@
 <div class="card {{ $fullHeight ? 'h-100' : '' }} {{ empty($class) ? '' : 'bg-'.$class }}" style="{{ $style }}">
-    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0 pt-4">
+    @if($headerContent)
+        <div class="card-header">
+            {!! $headerContent !!}
+        </div>
+    @endif
+    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0">
         @if ($icon)
-        <div class="px-4">
+        <div class="d-inline-flex flex-column justify-content-center px-4">
             {!! $icon !!}
         </div>
         @endif
-        <div class="card-body d-flex align-items-md-left flex-column">
+        <div class="card-body d-flex align-items-left flex-column">
             @if ($title)
-            <h3 class="card-title mb-4 lh-sm text-left">
-                    {{ $title }}
-            </h3>
+            <p class="card-title mb-3 text-left">
+                {{ $title }}
+            </p>
             @endif
             <div class="d-flex align-items-center justify-content-between">
                 @foreach($features as $feature)
@@ -18,13 +23,13 @@
             </div>
         </div>
     </div>
-    @if(count($footerItems) > 0)
-    <div class="card-footer d-flex align-items-center justify-content-around mt-3 py-4 border-top">
-        @foreach($footerItems as $item)
-            <div class="">
-            {!! $item !!}
-            </div>
+    @if(count($footerLinks) > 0)
+    <div class="card-footer d-flex align-items-center">
+        <div class="btn-group w-100">
+        @foreach($footerLinks as $link)
+            {!! $link !!}
         @endforeach
+        </div>
     </div>
     @endif
 </div>
