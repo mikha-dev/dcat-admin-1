@@ -119,6 +119,11 @@ return [
     */
     'https' => env('ADMIN_HTTPS', false),
 
+    'homw' => [
+
+        'controller' => Dcat\Admin\Http\Controllers\HomeController::class
+    ],
+
     'registration' => [
 
         'controller' => Dcat\Admin\Http\Controllers\RegistrationController::class,
