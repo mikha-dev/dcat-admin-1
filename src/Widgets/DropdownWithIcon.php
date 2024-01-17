@@ -13,19 +13,22 @@ class DropdownWithIcon extends Widget
     /** @var DropdownItem[] $items */
     protected array $items = [];
 
-    protected string $icon;
+    protected ?string $icon = null;
     protected string $title = '';
     protected ?string $description = null;
     protected bool $click = FALSE;
 
-    protected StyleClassType $btnClass = StyleClassType::PRIMARY;
+    protected StyleClassType $iconClass = StyleClassType::LIGHT;
+    protected StyleClassType $btnClass = StyleClassType::SECONDARY;
     protected StyleClassType $titleClass = StyleClassType::LIGHT;
-    protected StyleClassType $descriptionClass = StyleClassType::SECONDARY;
+    protected StyleClassType $descriptionClass = StyleClassType::LIGHT;
 
     /** @var DropdownItem[] $items */
-    public function __construct($items = [])
+    public function __construct($items = [], StyleClassType|null $class = null)
     {
-        $this->icon = DcatIcon::SETTINGS();
+        if( !is_null($class) ) {
+            $this->btnClass = $class;
+        }
 
         $this->items($items);
 
@@ -40,23 +43,32 @@ class DropdownWithIcon extends Widget
         return $this;
     }
 
-    public function title(string $title): static
+    public function title(string $title, StyleClassType|null $class = null): static
     {
         $this->title = $title;
+        if( !is_null($class) ) {
+            $this->titleClass = $class;
+        }
 
         return $this;
     }
 
-    public function description(string $value): static
+    public function description(string $value, StyleClassType|null $class = null): static
     {
         $this->description = $value;
+        if( !is_null($class) ) {
+            $this->descriptionClass = $class;
+        }
 
         return $this;
     }
 
-    public function icon(DcatIcon $icon): static
+    public function icon(DcatIcon $icon, StyleClassType|null $class = null): static
     {
         $this->icon = $icon->_();
+        if( !is_null($class) ) {
+            $this->iconClass = $class;
+        }
 
         return $this;
     }
@@ -73,11 +85,12 @@ class DropdownWithIcon extends Widget
         $this->addVariables([
             'items' => $this->items,
             'icon' => $this->icon,
+            'iconClass' => $this->iconClass,
             'title' => $this->title,
-            'description' => $this->description,
-            'btnClass' => $this->btnClass,
             'titleClass' => $this->titleClass,
-            'descriptionClass' => $this->descriptionClass
+            'description' => $this->description,
+            'descriptionClass' => $this->descriptionClass,
+            'btnClass' => $this->btnClass,
         ]);
 
         return parent::render();
