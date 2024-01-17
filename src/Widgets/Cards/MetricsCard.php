@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Dcat\Admin\Widgets\Cards;
 
 use Dcat\Admin\Widgets\Widget;
@@ -8,18 +8,22 @@ use Illuminate\Contracts\Support\Renderable;
 class MetricsCard extends Widget
 {
     protected $view = 'admin::widgets.metrics-card';
-    protected string $content;
     protected ?string $icon = null;
     protected ?string $tool = null;
     protected ?string $value = null;
-    protected ?string $description = null;
+    protected ?string $target = null;
 
     public function __construct(
         protected string $title,
-        protected string $c
+        protected string|\Closure|Renderable $content,
+        protected string $id = ''
     ) {
         $this->title($title);
-        $this->content($c);
+        $this->content($content);
+
+        if( empty($this->id) ) {
+            $this->id = 'id-metrics-card-'.md5(time().rand());
+        }
     }
 
     public function title(?string $title = null) : static
@@ -35,13 +39,13 @@ class MetricsCard extends Widget
         return $this;
     }
 
-    public function icon(string $value) : static {
-        $this->icon = $value;
+    public function icon(string|\Closure|Renderable|null $value) : static {
+        $this->icon = $this->toString($value);
 
         return $this;
     }
 
-    public function tool(string|Renderable|\Closure $value) : static
+    public function tool(string|Renderable|\Closure|null $value) : static
     {
         $this->tool = $this->toString($value);
 
@@ -54,8 +58,8 @@ class MetricsCard extends Widget
         return $this;
     }
 
-    public function description(string $value) : static {
-        $this->description = $value;
+    public function target(string $value) : static {
+        $this->target = $value;
 
         return $this;
     }
@@ -63,14 +67,14 @@ class MetricsCard extends Widget
     public function defaultVariables() : array
     {
         return [
+            'id'            => $this->id,
             'attributes'    => $this->formatHtmlAttributes(),
             'content'       => $this->toString($this->content),
             'title'         => $this->title,
             'icon'          => $this->icon,
             'tool'          => $this->tool,
             'value'         => $this->value,
-            'description'   => $this->description
+            'target'        => $this->target
         ];
     }
-
 }

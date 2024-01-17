@@ -2,13 +2,16 @@
 declare(strict_types=1);
 namespace Dcat\Admin\Widgets\ApexCharts;
 
-use Dcat\Admin\Widgets\ApexCharts\ApexChartBase;
-
-class ColumnChart extends ApexChartBase
+class DonutChart extends ApexChartBase
 {
+
+    protected int $hollowSize = 70;
     protected int $offset = 0;
     protected int $height = 380;
     protected int $fontSize = 36;
+    protected int $startAngle = -180;
+    protected int $endAngle = 180;
+    protected int $valueOffsetY = 14;
 
     protected array $padding = [
         'top' => -75,
@@ -20,6 +23,13 @@ class ColumnChart extends ApexChartBase
     public function __construct($selector = null, array $options = [])
     {
         parent::__construct($selector, $options);
+    }
+
+    public function hollowSize(int $size): static
+    {
+        $this->hollowSize = $size;
+
+        return $this;
     }
 
     public function height(int $value): static
@@ -57,10 +67,31 @@ class ColumnChart extends ApexChartBase
         return $this;
     }
 
+    public function startAngle(int $value): static
+    {
+        $this->startAngle = $value;
+
+        return $this;
+    }
+
+    public function endAngle(int $value): static
+    {
+        $this->endAngle = $value;
+
+        return $this;
+    }
+
+    public function valueOffsetY(int $value): static
+    {
+        $this->valueOffsetY = $value;
+
+        return $this;
+    }
+
     protected function setupOptions(): void
     {
         $this->chart([
-            'type' => 'bar',
+            'type' => 'donut',
             'height' => $this->height,
             'sparkline' => [
                 'enabled' => true
@@ -69,12 +100,15 @@ class ColumnChart extends ApexChartBase
 
         $this->options([
             'grid' => [
-                'show' => false
+                'padding' => $this->padding
             ],
             'plotOptions' => [
-                'bar' => [
-                    'columnWidth' => '45%',
-                    'distributed' => true
+                'pie' => [
+                    'hollow' => [
+                        'size' => $this->hollowSize . '%',
+                    ],
+                    'startAngle' => $this->startAngle,
+                    'endAngle' => $this->endAngle,
                 ],
             ],
         ]);

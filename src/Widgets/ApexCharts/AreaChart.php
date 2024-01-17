@@ -4,7 +4,7 @@ namespace Dcat\Admin\Widgets\ApexCharts;
 
 use Dcat\Admin\Widgets\ApexCharts\ApexChartBase;
 
-class ColumnChart extends ApexChartBase
+class AreaChart extends ApexChartBase
 {
     protected int $offset = 0;
     protected int $height = 380;
@@ -60,7 +60,7 @@ class ColumnChart extends ApexChartBase
     protected function setupOptions(): void
     {
         $this->chart([
-            'type' => 'bar',
+            'type' => 'area',
             'height' => $this->height,
             'sparkline' => [
                 'enabled' => true
