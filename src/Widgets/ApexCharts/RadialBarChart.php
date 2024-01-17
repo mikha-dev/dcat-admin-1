@@ -12,6 +12,7 @@ class RadialBarChart extends ApexChartBase
     protected int $startAngle = -180;
     protected int $endAngle = 180;
     protected int $valueOffsetY = 14;
+    protected bool $showLabel = false;
 
     protected array $padding = [
         'top' => -75,
@@ -23,6 +24,13 @@ class RadialBarChart extends ApexChartBase
     public function __construct($selector = null, array $options = [])
     {
         parent::__construct($selector, $options);
+    }
+
+    public function showLabel(bool $value = true): static
+    {
+        $this->showLabel = $value;
+
+        return $this;
     }
 
     public function hollowSize(int $size): static
@@ -105,7 +113,7 @@ class RadialBarChart extends ApexChartBase
             'plotOptions' => [
                 'radialBar' => [
                     'dataLabels' => [
-                        'show' => true,
+                        'show' => $this->showLabel,
                         'name' => [
                             'show' => false,
                         ],
