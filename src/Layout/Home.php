@@ -11,7 +11,8 @@ class Home
 
     public function withBuilder(Closure $builder) : static {
 
-        $this->builder = $builder;
+        if(!$this->builder)
+            $this->builder = $builder;
 
         return $this;
     }
