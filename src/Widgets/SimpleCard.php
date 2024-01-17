@@ -14,7 +14,7 @@ class SimpleCard extends Widget
     protected ?string $tool = null;
     protected bool $fullHeight = false;
 
-    public function __construct(?string $title = null, string $content = null)
+    public function __construct(?string $title = null, string|\Closure|Renderable|LazyWidget|null $content = null)
     {
         $this->title($title);
         $this->content($content);
@@ -22,7 +22,7 @@ class SimpleCard extends Widget
 
     public function content( string|\Closure|Renderable|LazyWidget|null $content = null) : static
     {
-        $this->content = $this->formatRenderable($content);
+        $this->content = $this->toString($content);
 
         return $this;
     }
