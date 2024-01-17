@@ -1,6 +1,5 @@
 <style>
     .login-box {
-        margin-top: -10rem;
         padding: 5px;
     }
     .login-card-body {

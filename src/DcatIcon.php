@@ -43,6 +43,7 @@ enum DcatIcon: string {
     case HAND_DOWN = 'hand-o-down';
     case RECYCLE = 'recycle';
     case MAP = 'map-pin';
+    case CHART_COLUMN = 'chart-column';
 
 	public function _(bool $fullTag = FALSE, ?string $title = null) {
 		return self::format($this, $fullTag, $title);

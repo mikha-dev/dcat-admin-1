@@ -1,1 +1,3 @@
-<span class="badge rounded-pill bg-{$style}"><strong>{$title}:</strong><span class="mx-2">{$description}</span>{$icon}</span>
+<div class="badge bg-label-{{ $class }}">
+    <i class="{!! $icon !!} text-{{ $class }}"></i> {!! $title !!}
+</div>

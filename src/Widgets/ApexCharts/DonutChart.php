@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Dcat\Admin\Widgets\ApexCharts;
 
-class RadialBarChart extends ApexChartBase
+class DonutChart extends ApexChartBase
 {
 
     protected int $hollowSize = 70;
@@ -12,7 +12,6 @@ class RadialBarChart extends ApexChartBase
     protected int $startAngle = -180;
     protected int $endAngle = 180;
     protected int $valueOffsetY = 14;
-    protected bool $showLabel = false;
 
     protected array $padding = [
         'top' => -75,
@@ -24,13 +23,6 @@ class RadialBarChart extends ApexChartBase
     public function __construct($selector = null, array $options = [])
     {
         parent::__construct($selector, $options);
-    }
-
-    public function showLabel(bool $value = true): static
-    {
-        $this->showLabel = $value;
-
-        return $this;
     }
 
     public function hollowSize(int $size): static
@@ -54,9 +46,9 @@ class RadialBarChart extends ApexChartBase
         return $this;
     }
 
-    public function value(int $value): static
+    public function value(array $value): static
     {
-        $this->series([$value]);
+        $this->series($value);
 
         return $this;
     }
@@ -99,7 +91,7 @@ class RadialBarChart extends ApexChartBase
     protected function setupOptions(): void
     {
         $this->chart([
-            'type' => 'radialBar',
+            'type' => 'donut',
             'height' => $this->height,
             'sparkline' => [
                 'enabled' => true
@@ -111,18 +103,7 @@ class RadialBarChart extends ApexChartBase
                 'padding' => $this->padding
             ],
             'plotOptions' => [
-                'radialBar' => [
-                    'dataLabels' => [
-                        'show' => $this->showLabel,
-                        'name' => [
-                            'show' => false,
-                        ],
-                        'value' => [
-                            'offsetY' => $this->valueOffsetY,
-                            'fontSize' => $this->fontSize.'px',
-                            'show' => true,
-                        ]
-                    ],
+                'pie' => [
                     'hollow' => [
                         'size' => $this->hollowSize . '%',
                     ],
