@@ -1,29 +1,6 @@
-<style>
-.inter-button{
-    padding: 25px;
-    flex-basis: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.inter-button:not(:last-child){
-    border-right: 1px solid #383838;
-}
-
-.inter-button .icon{
-    margin-right: 12px;
-}
-
-.inter-button .text{
-    color: #FFF;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-</style>
-<div class='inter-button'>
-    @if($icon) <span class='icon'>{!! $icon !!}</span> @endif
-    <span class='text'><a href="{{ $href }}">{{ $text }}</a></span>
-</div>
+<a class="btn btn-outline-{{ $class  }}" href="{{ $href }}">
+    <span class="h5 m-0 p-2">
+        @if($icon)<span class='icon me-1'>{!! $icon !!}</span>@endif
+        {{ $text }}
+    </span>
+</a>

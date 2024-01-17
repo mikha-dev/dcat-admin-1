@@ -10,7 +10,8 @@ class FeaturedCard extends Widget
 
     protected ?string $title = null;
     protected ?string $icon = null;
-    protected array $footerItems = [];
+    protected ?string $headerContent = null;
+    protected array $footerLinks = [];
     protected array $features = [];
     protected bool $fullHeight = false;
 
@@ -19,35 +20,42 @@ class FeaturedCard extends Widget
         $this->title($title);
     }
 
-    public function icon(string|Renderable|\Closure  $icon) : FeaturedCard
+    public function icon(string|Renderable|\Closure $value) : static
     {
-        $this->icon = $this->toString($icon);
+        $this->icon = $this->toString($value);
 
         return $this;
     }
 
-    public function fullHeight(bool $value = true) : FeaturedCard
+    public function headerContent(string|Renderable|\Closure $value) : static
+    {
+        $this->headerContent = $this->toString($value);
+
+        return $this;
+    }
+
+    public function fullHeight(bool $value = true) : static
     {
         $this->fullHeight = $value;
 
         return $this;
     }
 
-    public function addFeature(string|Renderable|\Closure  $content) : FeaturedCard
+    public function addFeature(string|Renderable|\Closure  $content) : static
     {
         $this->features[] = $this->toString($content);
 
         return $this;
     }
 
-    public function addFooterElement(string|Renderable|\Closure  $content) : FeaturedCard
+    public function addFooterLink(string|Renderable|\Closure  $content) : static
     {
-        $this->footerItems[] = $this->toString($content);;
+        $this->footerLinks[] = $this->toString($content);;
 
         return $this;
     }
 
-    public function title(?string $title = null) : FeaturedCard
+    public function title(?string $title = null) : static
     {
         $this->title = $title;
 
@@ -60,13 +68,14 @@ class FeaturedCard extends Widget
     public function defaultVariables()
     {
         return [
-            'title'      => $this->title,
-            'icon'      => $this->icon,
-            'features'     => $this->features,
-            'footerItems'     => $this->footerItems,
-            'class' => $this->getHtmlAttribute('class'),
-            'style' => $this->getHtmlAttribute('style'),
-            'fullHeight' => $this->fullHeight,
+            'title'         => $this->title,
+            'icon'          => $this->icon,
+            'headerContent' => $this->headerContent,
+            'features'      => $this->features,
+            'footerLinks'   => $this->footerLinks,
+            'class'         => $this->getHtmlAttribute('class'),
+            'style'         => $this->getHtmlAttribute('style'),
+            'fullHeight'    => $this->fullHeight,
         ];
     }
 }

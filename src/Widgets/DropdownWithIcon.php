@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Dcat\Admin\Widgets;
 
+use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\DcatIcon;
 
 class DropdownWithIcon extends Widget
@@ -13,10 +14,13 @@ class DropdownWithIcon extends Widget
     protected array $items = [];
 
     protected string $icon;
-
     protected string $title = '';
-
+    protected ?string $description = null;
     protected bool $click = FALSE;
+
+    protected StyleClassType $btnClass = StyleClassType::PRIMARY;
+    protected StyleClassType $titleClass = StyleClassType::LIGHT;
+    protected StyleClassType $descriptionClass = StyleClassType::SECONDARY;
 
     /** @var DropdownItem[] $items */
     public function __construct($items = [])
@@ -43,6 +47,13 @@ class DropdownWithIcon extends Widget
         return $this;
     }
 
+    public function description(string $value): static
+    {
+        $this->description = $value;
+
+        return $this;
+    }
+
     public function icon(DcatIcon $icon): static
     {
         $this->icon = $icon->_();
@@ -63,6 +74,10 @@ class DropdownWithIcon extends Widget
             'items' => $this->items,
             'icon' => $this->icon,
             'title' => $this->title,
+            'description' => $this->description,
+            'btnClass' => $this->btnClass,
+            'titleClass' => $this->titleClass,
+            'descriptionClass' => $this->descriptionClass
         ]);
 
         return parent::render();
