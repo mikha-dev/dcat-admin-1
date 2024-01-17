@@ -4,6 +4,7 @@ namespace Dcat\Admin;
 
 use D4T\Core\Models\Domain;
 use Dcat\Admin\Impersonate;
+use Dcat\Admin\Layout\Home;
 use Dcat\Admin\Layout\Menu;
 use Illuminate\Support\Arr;
 use Dcat\Admin\Layout\Asset;
@@ -244,6 +245,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->app->singleton(ExceptionHandler::class, config('admin.exception_handler') ?: Handler::class);
         $this->app->singleton('admin.translator', Translator::class);
         $this->app->singleton('admin.impersonate', Impersonate::class);
+        $this->app->singleton('admin.home', Home::class);
     }
 
     public function registerExtensions() : void

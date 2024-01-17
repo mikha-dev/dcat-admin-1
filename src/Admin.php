@@ -5,10 +5,12 @@ namespace Dcat\Admin;
 use Closure;
 use D4T\Core\Models\Domain;
 use Dcat\Admin\Impersonate;
+use Dcat\Admin\Layout\Home;
 use Dcat\Admin\Layout\Menu;
 use Dcat\Admin\Layout\Footer;
 use Dcat\Admin\Layout\Navbar;
 use Dcat\Admin\Extend\Manager;
+use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\UserNav;
 use Dcat\Admin\Support\Helper;
 use Dcat\Admin\Traits\HasHtml;
@@ -38,15 +40,16 @@ use D4T\Core\Traits\HasDashboardNotifications;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Symfony\Component\HttpFoundation\Response;
 use Dcat\Admin\Http\Controllers\AuthController;
+use Dcat\Admin\Http\Controllers\HomeController;
 use Dcat\Admin\Repositories\EloquentRepository;
 use Dcat\Admin\Exception\InvalidArgumentException;
 use D4T\Core\Contracts\EmailContextObjectInterface;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Dcat\Admin\Http\Controllers\AppSettingsController;
+use Dcat\Admin\Http\Controllers\RegistrationController;
 use Dcat\Admin\Http\Controllers\AuthenticationLogController;
 use Dcat\Admin\Http\Controllers\ControllerHelpTopicController;
 use Dcat\Admin\Http\Controllers\DashboardNotificationController;
-use Dcat\Admin\Http\Controllers\RegistrationController;
 
 class Admin
 {
@@ -111,6 +114,15 @@ class Admin
         $builder && $builder($menu);
 
         return $menu;
+    }
+
+    public static function home(Closure $builder = null) : Home
+    {
+        $home = app('admin.home');
+
+        $builder && $home->withBuilder($builder);
+
+        return $home;
     }
 
     public static function title($title = null) : string
@@ -634,6 +646,10 @@ class Admin
             $router->put('auth/profile', $authController.'@putProfile');
 
             $router->get('locale/{key}', $authController.'@setLocale')->name(RouteAuth::LOCALE());
+
+
+            $homeController = config('admin.home.controller', HomeController::class);
+            $router->get('/', $homeController.'@index')->name(RouteAuth::HOME());
         });
 
         //static::registerHelperRoutes();
