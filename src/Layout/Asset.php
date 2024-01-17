@@ -167,8 +167,8 @@ class Asset
             'js' => '@admin/dcat/plugins/input-mask/jquery.inputmask.bundle.min.js',
         ],
         '@apex-charts' => [
-            'js' => '@admin/dcat/plugins/charts/apex-charts/apexcharts.js',
-            'css' => '@admin/dcat/plugins/charts/apex-charts/apexcharts.css',
+            'js' => '@admin/dcat/plugins/charts/apexcharts.js',
+            'css' => '@admin/dcat/plugins/charts/apexcharts.css',
         ],
         // '@apex-charts' => [
         //     'js' => '@admin/dcat/plugins/charts/apexcharts.min.js',
@@ -424,11 +424,14 @@ class Asset
 
         $assets = $this->getAlias($alias, $params);
 
-        $this->js($assets['js']);
-        $this->css($assets['css']);
+        if(isset($assets['js']) && !empty($assets['js']))
+            $this->js($assets['js']);
+
+        if(isset($assets['css']) && !empty($assets['css']))
+            $this->css($assets['css']);
     }
 
-    public function css(string|array $css)
+    public function css(string|array|null $css)
     {
         if (! $css) {
             return;
@@ -439,7 +442,7 @@ class Asset
         );
     }
 
-    public function cssClasses(string|array $classes)
+    public function cssClasses(string|array|null $classes) : void
     {
         if (! $classes ) {
             return;
@@ -689,6 +692,7 @@ class Asset
         $html = '';
 
         foreach (array_unique($this->css) as &$v) {
+
             if (! $paths = $this->get($v, 'css')) {
                 continue;
             }

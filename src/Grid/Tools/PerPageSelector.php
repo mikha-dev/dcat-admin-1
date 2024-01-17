@@ -2,9 +2,13 @@
 
 namespace Dcat\Admin\Grid\Tools;
 
-use Dcat\Admin\Admin;
 use Dcat\Admin\Grid;
-use Dcat\Admin\Widgets\Dropdown;
+use Dcat\Admin\Admin;
+use Illuminate\Support\Collection;
+use Dcat\Admin\Widgets\DropdownAdv;
+use Dcat\Admin\Enums\ButtonSizeType;
+use Dcat\Admin\Widgets\DropdownItem;
+use Dcat\Admin\Enums\ButtonClassType;
 use Illuminate\Contracts\Support\Renderable;
 
 class PerPageSelector implements Renderable
@@ -56,7 +60,7 @@ class PerPageSelector implements Renderable
      *
      * @return static
      */
-    public function getOptions()
+    public function getOptions() : Collection
     {
         return collect($this->parent->getPerPages())
             ->push($this->parent->getPerPage())
@@ -77,19 +81,15 @@ class PerPageSelector implements Renderable
         $options = $this->getOptions()->map(function ($option) {
             $url = app('request')->fullUrlWithQuery([$this->perPageName => $option]);
 
-            return "<a href=\"{$url}\">$option</a>";
+            return new DropdownItem($option, $url);
         })->toArray();
 
-        $dropdown = Dropdown::make($options)
+        return (new DropdownAdv($options))
             ->up()
             ->button($this->perPage)
+            ->buttonClass(ButtonClassType::PRIMARY, true)
+            ->size(ButtonSizeType::SM)
             ->render();
-
-        return <<<EOT
-<label class="pull-right d-none d-sm-inline per-pages-selector" style="margin-right: 10px">
-    $dropdown
-</label>
-EOT;
     }
 
     /**

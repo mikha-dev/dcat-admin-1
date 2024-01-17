@@ -242,14 +242,6 @@ class Tools implements Renderable
         return preg_replace_callback('/class=[\'|"]([a-z0-9A-Z-_\s]*)[\'|"]/', function ($text) {
             $class = array_filter(explode(' ', $text[1]));
 
-            if (
-                in_array('btn', $class, true)
-                && ! in_array('disable-outline', $class, true)
-                && Str::contains($text[1], 'btn-')
-            ) {
-                $class[] = 'btn-outline';
-            }
-
             return sprintf('class="%s"', implode(' ', $class));
         }, $value);
     }

@@ -20,34 +20,34 @@ class SimpleCard extends Widget
         $this->content($content);
     }
 
-    public function content( string|\Closure|Renderable|LazyWidget $content) : SimpleCard
+    public function content( string|\Closure|Renderable|LazyWidget|null $content = null) : static
     {
         $this->content = $this->formatRenderable($content);
 
         return $this;
     }
 
-    public function fullHeight(bool $value = true) : SimpleCard {
+    public function fullHeight(bool $value = true) : static {
         $this->fullHeight = $value;
 
         return $this;
     }
 
-    public function footer(string $content) : SimpleCard
+    public function footer(string $content) : static
     {
         $this->footer = $content;
 
         return $this;
     }
 
-    public function title(string $title) : SimpleCard
+    public function title(?string $title = null) : static
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function tool(string|Renderable|\Closure $content) : SimpleCard
+    public function tool(string|Renderable|\Closure $content) : static
     {
         $this->tool = $this->toString($content);
 
