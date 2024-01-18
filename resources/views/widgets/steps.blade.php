@@ -1,4 +1,4 @@
-<div class="list-group list-group-horizontal-md text-md-center">
+<div class="list-group list-group-horizontal-md text-md-center {{ is_null($class_ext) ? '' : $class_ext }}">
     @foreach($items as $idx => $item)
     <div
         id="step_{{ $item['id'] }}"

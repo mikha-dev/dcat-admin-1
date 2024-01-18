@@ -68,14 +68,14 @@ class FeaturedCard extends Widget
     public function defaultVariables()
     {
         return [
-            'title'         => $this->title,
-            'icon'          => $this->icon,
-            'headerContent' => $this->headerContent,
-            'features'      => $this->features,
-            'footerLinks'   => $this->footerLinks,
-            'class'         => $this->getHtmlAttribute('class'),
-            'style'         => $this->getHtmlAttribute('style'),
-            'fullHeight'    => $this->fullHeight,
+            'title'             => $this->title,
+            'icon'              => $this->icon,
+            'header_content'    => $this->headerContent,
+            'features'          => $this->features,
+            'footer_links'      => $this->footerLinks,
+            'class'             => $this->getHtmlAttribute('class'),
+            'style'             => $this->getHtmlAttribute('style'),
+            'full_height'       => $this->fullHeight,
         ];
     }
 }

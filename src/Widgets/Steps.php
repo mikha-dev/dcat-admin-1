@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace Dcat\Admin\Widgets;
 
 use Illuminate\Contracts\Support\Renderable;
@@ -11,8 +10,9 @@ class Steps implements Renderable
 
     protected array $items = [];
     protected int $activeIdx = 0;
+    protected ?string $classExt = null;
 
-    public function add(string $title, string $description, bool $active = false, string $icon = null, string $id = null)
+    public function add(string $title, string $description, bool $active = false, string $icon = null, string $id = null): static
     {
 
         $id = $id ?: mt_rand();
@@ -32,10 +32,18 @@ class Steps implements Renderable
         return $this;
     }
 
-    public function render()
+    public function classExt(string $value): static
+    {
+        $this->classExt = $value;
+
+        return $this;
+    }
+
+    public function render(): string
     {
         $data['items'] = $this->items;
         $data['active_idx'] = $this->activeIdx;
+        $data['class_ext'] = $this->classExt;
 
         return view($this->view, $data)->render();
     }

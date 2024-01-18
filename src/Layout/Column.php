@@ -119,7 +119,7 @@ class Column implements Renderable
             return $value == 0 ? "col-$key" : "col-$key-$value";
         })->implode(' ');
 
-        return "<div class=\"{$classnName}\">";
+        return "<div class=\"{$classnName} py-2\">";
     }
 
     /**
