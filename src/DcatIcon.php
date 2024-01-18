@@ -75,4 +75,8 @@ enum DcatIcon: string {
 		}
 		return $class;
 	}
+
+    public static function base( string $icon) {
+        return self::BASE.$icon;
+    }
 }

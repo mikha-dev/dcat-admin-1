@@ -5,9 +5,9 @@
         </div>
     @endif
     <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0">
-        @if ($icon)
+        @if ($image)
             <div class="d-inline-flex flex-column justify-content-center ps-4">
-                {!! $icon !!}
+                {!! $image !!}
             </div>
         @endif
         <div class="card-body d-flex align-items-left flex-column">

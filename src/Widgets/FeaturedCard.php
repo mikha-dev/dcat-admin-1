@@ -9,7 +9,7 @@ class FeaturedCard extends Widget
     protected $view = 'admin::widgets.card-featured';
 
     protected ?string $title = null;
-    protected ?string $icon = null;
+    protected ?string $image = null;
     protected ?string $headerContent = null;
     protected array $footerLinks = [];
     protected array $features = [];
@@ -20,9 +20,9 @@ class FeaturedCard extends Widget
         $this->title($title);
     }
 
-    public function icon(string|Renderable|\Closure $value) : static
+    public function image(string|Renderable $value) : static
     {
-        $this->icon = $this->toString($value);
+        $this->image = $this->toString($value);
 
         return $this;
     }
@@ -69,7 +69,7 @@ class FeaturedCard extends Widget
     {
         return [
             'title'             => $this->title,
-            'icon'              => $this->icon,
+            'image'              => $this->image,
             'header_content'    => $this->headerContent,
             'features'          => $this->features,
             'footer_links'      => $this->footerLinks,
