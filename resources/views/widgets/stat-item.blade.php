@@ -11,9 +11,7 @@
                     @if($description)<small class="text-muted">{{ $description }}</small>@endif
                 </div>
                 @if($value)
-                    <div class="user-progress">
-                        <small class="fw-medium">{!! $value !!}</small>
-                    </div>
+                    {!! $value !!}
                 @endif
             </div>
         </div>
