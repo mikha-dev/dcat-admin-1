@@ -46,6 +46,7 @@ class DropdownWithIcon extends Widget
     public function title(string $title, StyleClassType|null $class = null): static
     {
         $this->title = $title;
+
         if( !is_null($class) ) {
             $this->titleClass = $class;
         }
