@@ -14,7 +14,7 @@
             </span>
             @endif
             <span class="d-inline-flex flex-column justify-content-center">
-                <span class="h3 m-0 text-{{ $title_class }} text-start">{{ $title }}</span>
+                <span class="h3 text-bold m-0 text-{{ $title_class }} text-start">{{ $title }}</span>
                 @if($description)
                     <span class="h5 m-0 text-{{ $description_class }} pt-1 text-start">{{ $description }}</span>
                 @endif
