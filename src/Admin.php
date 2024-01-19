@@ -650,6 +650,8 @@ class Admin
 
             $homeController = config('admin.home.controller', HomeController::class);
             $router->get('/', $homeController.'@index')->name(RouteAuth::HOME());
+
+            $router->get('empty');
         });
 
         //static::registerHelperRoutes();
