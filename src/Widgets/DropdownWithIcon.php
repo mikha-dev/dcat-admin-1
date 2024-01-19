@@ -13,21 +13,30 @@ class DropdownWithIcon extends Widget
     /** @var DropdownItem[] $items */
     protected array $items = [];
 
+    protected string $id = '';
     protected ?string $icon = null;
     protected string $title = '';
     protected ?string $description = null;
     protected bool $click = FALSE;
 
-    protected StyleClassType $iconClass = StyleClassType::LIGHT;
+    protected StyleClassType $iconClass = StyleClassType::PRIMARY;
     protected StyleClassType $btnClass = StyleClassType::SECONDARY;
-    protected StyleClassType $titleClass = StyleClassType::LIGHT;
-    protected StyleClassType $descriptionClass = StyleClassType::LIGHT;
+    protected StyleClassType $titleClass = StyleClassType::PRIMARY;
+    protected StyleClassType $descriptionClass = StyleClassType::PRIMARY;
 
     /** @var DropdownItem[] $items */
-    public function __construct($items = [], StyleClassType|null $class = null)
+    public function __construct(
+        array $items = [],
+        string|null $id = null,
+        StyleClassType|null $class = null
+    )
     {
         if( !is_null($class) ) {
             $this->btnClass = $class;
+        }
+
+        if( is_null($id) ) {
+            $this->id = "id-dropdown-with-icon-".md5(time().rand());
         }
 
         $this->items($items);
@@ -84,14 +93,15 @@ class DropdownWithIcon extends Widget
     public function render(): string
     {
         $this->addVariables([
-            'items' => $this->items,
-            'icon' => $this->icon,
-            'iconClass' => $this->iconClass,
-            'title' => $this->title,
-            'titleClass' => $this->titleClass,
-            'description' => $this->description,
-            'descriptionClass' => $this->descriptionClass,
-            'btnClass' => $this->btnClass,
+            'id'                => $this->id,
+            'items'             => $this->items,
+            'icon'              => $this->icon,
+            'icon_class'        => $this->iconClass,
+            'title'             => $this->title,
+            'title_class'       => $this->titleClass,
+            'description'       => $this->description,
+            'description_class' => $this->descriptionClass,
+            'btn_class'         => $this->btnClass,
         ]);
 
         return parent::render();
