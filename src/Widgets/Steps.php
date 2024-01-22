@@ -12,12 +12,11 @@ class Steps implements Renderable
     protected array $items = [];
     protected int $activeIdx = 0;
     protected ?string $classExt = null;
-    protected StyleClassType $stepActiveClass = StyleClassType::PRIMARY;
-    protected StyleClassType $stepInactiveClass = StyleClassType::SECONDARY;
+    protected StyleClassType|null $stepActiveClass = null;
+    protected StyleClassType|null $stepInactiveClass = null;
 
     public function add(string $title, string $description, bool $active = false, string $icon = null, string $id = null): static
     {
-
         $id = $id ?: mt_rand();
 
         $this->items[] = [
@@ -61,8 +60,8 @@ class Steps implements Renderable
         $data['items'] = $this->items;
         $data['active_idx'] = $this->activeIdx;
         $data['class_ext'] = $this->classExt;
-        $data['step_active_class'] = $this->stepActiveClass->value;
-        $data['step_inactive_class'] = $this->stepInactiveClass->value;
+        $data['step_active_class'] = $this->stepActiveClass ? $this->stepActiveClass->value : '';
+        $data['step_inactive_class'] = $this->stepInactiveClass ? $this->stepInactiveClass->value : '';
 
         return view($this->view, $data)->render();
     }
