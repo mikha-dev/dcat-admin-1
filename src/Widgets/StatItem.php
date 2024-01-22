@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 namespace Dcat\Admin\Widgets;
 
+use D4T\Core\Enums\StyleClassType;
 use Illuminate\Contracts\Support\Renderable;
 
 class StatItem implements Renderable
 {
-    protected $view = 'admin::widgets.stat-item';
+    protected string $view = 'admin::widgets.stat-item';
     protected bool $inverse = false;
     protected bool $withCard = false;
+    protected StyleClassType $iconClass = StyleClassType::PRIMARY;
 
     public function __construct(
         protected string $icon,
@@ -29,6 +31,13 @@ class StatItem implements Renderable
     public function withCard() : StatItem
     {
         $this->withCard = true;
+
+        return $this;
+    }
+
+    public function iconClass(StyleClassType $value) : static
+    {
+        $this->iconClass = $value;
 
         return $this;
     }
@@ -80,12 +89,13 @@ class StatItem implements Renderable
     public function render() : string
     {
         return view($this->view,[
-            'title'        => $this->title,
-            'description'      => $this->description,
-            'icon'         => $this->icon,
-            'value'        => $this->value,
-            'inverse'        => $this->inverse,
-            'with_card'        => $this->withCard
+            'title'         => $this->title,
+            'description'   => $this->description,
+            'icon'          => $this->icon,
+            'icon_class'    => $this->iconClass,
+            'value'         => $this->value,
+            'inverse'       => $this->inverse,
+            'with_card'     => $this->withCard
         ])->render();
     }
 }

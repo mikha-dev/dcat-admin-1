@@ -3,7 +3,7 @@
         @endif
         <div class="d-flex px-2 py-2">
             <div class="avatar flex-shrink-0 me-3">
-                <span class="avatar-initial rounded bg-label-primary">{!! $icon !!}</span>
+                <span class="avatar-initial rounded bg-label-{{ $icon_class }}">{!! $icon !!}</span>
             </div>
             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                 <div class="d-inline-flex me-2 {{ $inverse ? 'flex-column-reverse' : 'flex-column' }}">
