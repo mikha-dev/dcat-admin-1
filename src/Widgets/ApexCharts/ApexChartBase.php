@@ -109,6 +109,13 @@ class ApexChartBase extends Widget
         return $this;
     }
 
+    public function responsive(array $value) : ApexChartBase
+    {
+        $this->options['responsive'] = Helper::array($value);
+
+        return $this;
+    }
+
     /**
      * @param  array  $value
      * @return $this
