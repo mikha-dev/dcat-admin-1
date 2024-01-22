@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Dcat\Admin\Widgets\ApexCharts;
 
 use Dcat\Admin\Widgets\ApexCharts\ApexChartBase;
@@ -11,6 +13,14 @@ class AreaChart extends ApexChartBase
     protected int $fontSize = 36;
 
     protected bool $isSparkline = false;
+
+    protected array $breakpoints = [
+        'sm' => 576,
+        'md' => 768,
+        'lg' => 992,
+        'xl' => 1200,
+        'xxl' => 1400
+    ];
 
     protected array $padding = [
         'top' => -75,
@@ -48,6 +58,13 @@ class AreaChart extends ApexChartBase
     public function offset(int $value): static
     {
         $this->offset = $value;
+
+        return $this;
+    }
+
+    public function breakpoints(array $value): static
+    {
+        $this->breakpoints = array_merge($this->breakpoints, $value);
 
         return $this;
     }
@@ -90,6 +107,20 @@ class AreaChart extends ApexChartBase
                 ],
             ],
         ]);
+
+        $breakpoints = [];
+        foreach ($this->breakpoints as $breakpoint => $height) {
+            $breakpoints[] = [
+                'breakpoint' => $this->breakpoints[$breakpoint],
+                'options' => [
+                    'chart' => [
+                        'height' => $height
+                    ]
+                ]
+            ];
+        }
+
+        $this->responsive($breakpoints);
     }
 
     public function render(): string
