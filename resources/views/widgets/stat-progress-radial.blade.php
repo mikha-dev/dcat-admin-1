@@ -7,7 +7,7 @@
         <h5 class="text-bold m-0 mt-2 mb-2">{{ $title }}</h5>
         <h6 class="m-0 mb-2">{{$value_title}}</h6>
 
-        <div class="avatar flex-shrink-0">
+        <div class="flex-shrink-0 mx-2">
             <span class="avatar-initial rounded bg-label-{{ $class }}">{!! $icon !!}</span>
         </div>
 

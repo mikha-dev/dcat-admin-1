@@ -86,7 +86,7 @@ class StatProgressRadial implements Renderable
     {
         $progress = new RadialBarChart();
         $progress->showLabel();
-        $progress->value(89);
+        $progress->value((int)$this->value);
         $progress->hollowSize(60);
         $progress->height(150);
         $progress->startAngle(-90);
