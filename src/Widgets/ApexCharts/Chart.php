@@ -7,11 +7,7 @@ use Dcat\Admin\Support\Helper;
 class Chart extends ApexChartBase
 {
 
-    /**
-     * @param  string|array  $title
-     * @return $this
-     */
-    public function title($title)
+    public function title(string|array $title) :static
     {
         if (is_string($title)) {
             $options = ['text' => $title];
@@ -24,33 +20,21 @@ class Chart extends ApexChartBase
         return $this;
     }
 
-    /**
-     * @param  array  $value
-     * @return $this
-     */
-    public function xaxis($value)
+    public function xaxis(array $value) : static
     {
         $this->options['xaxis'] = Helper::array($value);
 
         return $this;
     }
 
-    /**
-     * @param  array  $value
-     * @return $this
-     */
-    public function yaxis($value)
+    public function yaxis(array $value) : static
     {
         $this->options['yaxis'] = Helper::array($value);
 
         return $this;
     }
 
-    /**
-     * @param  array  $value
-     * @return $this
-     */
-    public function tip($value)
+    public function tip(array $value) : static
     {
         $this->options['tooltip'] = Helper::array($value);
 

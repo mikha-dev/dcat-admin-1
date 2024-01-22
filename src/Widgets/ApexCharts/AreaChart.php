@@ -6,7 +6,7 @@ namespace Dcat\Admin\Widgets\ApexCharts;
 
 use Dcat\Admin\Widgets\ApexCharts\ApexChartBase;
 
-class AreaChart extends ApexChartBase
+class AreaChart extends Chart
 {
     protected int $offset = 0;
     protected int $height = 380;
