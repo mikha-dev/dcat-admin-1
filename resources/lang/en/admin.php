@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'metrics' => 'Metrics',
+    'details' => 'Details',
     'email' => 'Email',
     'security' => 'Security',
     'profile' => 'Profile',
