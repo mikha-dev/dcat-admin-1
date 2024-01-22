@@ -10,6 +10,8 @@ class AreaChart extends ApexChartBase
     protected int $height = 380;
     protected int $fontSize = 36;
 
+    protected bool $isSparkline = false;
+
     protected array $padding = [
         'top' => -75,
         'bottom' => -75,
@@ -57,13 +59,23 @@ class AreaChart extends ApexChartBase
         return $this;
     }
 
+    public function isSparkline(): static
+    {
+        $this->isSparkline = true;
+
+        return $this;
+    }
+
     protected function setupOptions(): void
     {
         $this->chart([
             'type' => 'area',
             'height' => $this->height,
+            'toolbar' => [
+                'show' => false
+            ],
             'sparkline' => [
-                'enabled' => true
+                'enabled' => $this->isSparkline
             ],
         ]);
 
