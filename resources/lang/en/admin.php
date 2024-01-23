@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'security' => 'Security',
+    'profile' => 'Profile',
+    'na' => 'N/A',
     'balance' => 'Balance',
     'orders' => 'Orders',
     'users' => 'Users',
