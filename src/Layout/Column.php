@@ -115,7 +115,10 @@ class Column implements Renderable
     protected function startColumn()
     {
         // get class name using width array
-        $classnName = collect($this->width)->map(function ($value, $key) {
+        $classnName = empty($this->width) ? 'col' : collect($this->width)->map(function ($value, $key) {
+            if( $key === "flex" ) {
+                return "col";
+            }
             return $value == 0 ? "col-$key" : "col-$key-$value";
         })->implode(' ');
 

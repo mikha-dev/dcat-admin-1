@@ -2,6 +2,7 @@
 
 namespace Dcat\Admin\Widgets;
 
+use D4T\Core\Enums\StyleClassType;
 use Illuminate\Contracts\Support\Renderable;
 
 class FeaturedCard extends Widget
@@ -14,6 +15,8 @@ class FeaturedCard extends Widget
     protected array $footerLinks = [];
     protected array $features = [];
     protected bool $fullHeight = false;
+    protected bool $withBorder = false;
+    protected StyleClassType|null $borderClass = StyleClassType::DARK;
 
     public function __construct(?string $title = null)
     {
@@ -37,6 +40,20 @@ class FeaturedCard extends Widget
     public function fullHeight(bool $value = true) : static
     {
         $this->fullHeight = $value;
+
+        return $this;
+    }
+
+    public function withBorder(): static
+    {
+        $this->withBorder = true;
+
+        return $this;
+    }
+
+    public function borderClass(StyleClassType $borderClass): static
+    {
+        $this->borderClass = $borderClass;
 
         return $this;
     }
@@ -69,13 +86,15 @@ class FeaturedCard extends Widget
     {
         return [
             'title'             => $this->title,
-            'image'              => $this->image,
+            'image'             => $this->image,
             'header_content'    => $this->headerContent,
             'features'          => $this->features,
             'footer_links'      => $this->footerLinks,
             'class'             => $this->getHtmlAttribute('class'),
             'style'             => $this->getHtmlAttribute('style'),
             'full_height'       => $this->fullHeight,
+            'with_border'       => $this->withBorder,
+            'border_class'      => empty($this->borderClass) ? '' : $this->borderClass->value
         ];
     }
 }
