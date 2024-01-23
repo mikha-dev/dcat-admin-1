@@ -75,16 +75,16 @@ class StepsWithProgressBar implements Renderable
     public function render(): string
     {
         $data['items'] = [];
-        foreach($this->items as $item) {
-            $data['items'][$item['id']] = $item;
+        foreach($this->items as $index => $item) {
+            $data['items'][$index] = $item;
 
-            $data['items'][$item['id']]['icon_class'] = $this->activeClass;
+            $data['items'][$index]['icon_class'] = $this->activeClass;
 
-            if( $data['items'][$item['id']]['percent'] == 100 ) {
-                $data['items'][$item['id']]['icon_class'] = $this->finishedClass;
+            if( $data['items'][$index]['percent'] == 100 ) {
+                $data['items'][$index]['icon_class'] = $this->finishedClass;
             }
-            if( $data['items'][$item['id']]['disabled'] ) {
-                $data['items'][$item['id']]['icon_class'] = $this->disabledClass;
+            if( $data['items'][$index]['disabled'] ) {
+                $data['items'][$index]['icon_class'] = $this->disabledClass;
             }
         }
 

@@ -10,7 +10,7 @@
                 <div>
                     <div class="avatar flex-shrink-0 me-3">
                         <span class="avatar-initial rounded bg-label-{{ $item['icon_class'] }}">
-                            <i class="fa fa-calendar"></i>
+                            {!! $item['icon'] !!}
                         </span>
                     </div>
                 </div>
