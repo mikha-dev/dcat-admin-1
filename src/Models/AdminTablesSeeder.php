@@ -83,7 +83,7 @@ class AdminTablesSeeder extends Seeder
                 'name'        => 'Menu',
                 'slug'        => 'menu',
                 'http_method' => '',
-                'http_path'   => '/auth/menu*',
+                'http_path'   => 'menu*',
                 'parent_id'   => 1,
                 'order'       => 5,
                 'created_at'  => $createdAt,
@@ -150,7 +150,7 @@ class AdminTablesSeeder extends Seeder
                 'order'         => 6,
                 'title'         => 'Menu',
                 'icon'          => '',
-                'uri'           => 'auth/menu',
+                'uri'           => 'menu',
                 'created_at'    => $createdAt,
             ],
             [

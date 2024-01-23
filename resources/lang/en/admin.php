@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'balance' => 'Balance',
+    'orders' => 'Orders',
+    'users' => 'Users',
+    'accounts' => 'Accounts',
+    'challenges' => 'Challenges',
+    'trading_objectives' => 'Trading Objectives',
     'metrics' => 'Metrics',
     'details' => 'Details',
     'email' => 'Email',
