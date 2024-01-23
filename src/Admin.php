@@ -606,7 +606,8 @@ class Admin
                 $router->resource('users', 'UserController')->name('index', RouteAuth::USERS());
                 $router->resource('menu', 'MenuController', ['except' => ['create', 'show']])->name('index', RouteAuth::MENU());
                 $router->resource('domains', 'DomainController')->name('index', RouteAuth::DOMAINS());
-                $router->resource('domain-menu', 'DomainMenuController')->name('index', RouteAuth::DOMAIN_MENU());
+                //todo::rm
+                //$router->resource('domain-menu', 'DomainMenuController')->name('index', RouteAuth::DOMAIN_MENU());
 
                 if (config('admin.permission.enable')) {
                     $router->resource('roles', 'RoleController')->name('index', RouteAuth::ROLES());

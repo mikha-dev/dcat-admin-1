@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'manager' => 'Manager',
     'security' => 'Security',
     'profile' => 'Profile',
     'na' => 'N/A',
