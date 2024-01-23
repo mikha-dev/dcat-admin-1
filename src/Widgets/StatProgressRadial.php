@@ -12,6 +12,7 @@ class StatProgressRadial implements Renderable
     protected string $view = 'admin::widgets.stat-progress-radial';
     protected ?string $description = null;
     protected bool $withCard = false;
+    protected bool $fullHeight = false;
 
     public function __construct(
         protected string $icon,
@@ -24,6 +25,13 @@ class StatProgressRadial implements Renderable
     public function withCard() : static
     {
         $this->withCard = true;
+
+        return $this;
+    }
+
+    public function fullHeight(): static
+    {
+        $this->fullHeight = true;
 
         return $this;
     }
@@ -98,13 +106,14 @@ class StatProgressRadial implements Renderable
         $progress->valueOffsetY(-2);
 
         return view($this->view,[
-            'title'        => $this->title,
-            'description'      => $this->description,
-            'icon'         => $this->icon,
-            'value_title'        => $this->valueTitle,
-            'progress' => $progress->render(),
-            'class' => $this->class->value,
-            'with_card'        => $this->withCard
+            'title'         => $this->title,
+            'description'   => $this->description,
+            'icon'          => $this->icon,
+            'value_title'   => $this->valueTitle,
+            'progress'      => $progress->render(),
+            'class'         => $this->class->value,
+            'with_card'     => $this->withCard,
+            'full_height'   => $this->fullHeight
         ])->render();
     }
 }

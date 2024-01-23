@@ -4,7 +4,7 @@
             {!! $header_content !!}
         </div>
     @endif
-    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0">
+    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0 {{ $with_border ? 'border border-1 border-bottom-0 rounded-top border-'.$border_class : '' }}">
         @if ($image)
             <div class="d-inline-flex flex-column justify-content-center align-items-center ps-4">
                 <div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     @if(count($footer_links) > 0)
-        <div class="card-footer d-flex align-items-center">
+        <div class="card-footer d-flex align-items-center p-0" style="margin-top: -3px">
             <div class="btn-group w-100">
                 @foreach($footer_links as $link)
                     {!! $link !!}
