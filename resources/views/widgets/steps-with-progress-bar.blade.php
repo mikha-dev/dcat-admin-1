@@ -12,7 +12,7 @@
         @endif
             <div>
                 <div class="avatar flex-shrink-0 me-3">
-                    <span class="avatar-initial rounded bg-label-{{ $item['icon_class'] }}">
+                    <span class="avatar-initial rounded bg-{{ $item['icon_class'] }} text-{{ $text_class }}">
                         {!! $item['icon'] !!}
                     </span>
                 </div>
