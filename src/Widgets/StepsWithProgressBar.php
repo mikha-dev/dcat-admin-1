@@ -12,9 +12,11 @@ class StepsWithProgressBar implements Renderable
     protected array $items = [];
 
     protected StyleClassType|null $bgClass = null;
+    protected StyleClassType|null $textClass = null;
     protected StyleClassType|null $finishedClass = null;
     protected StyleClassType|null $activeClass = null;
     protected StyleClassType|null $disabledClass = null;
+    protected StyleClassType|null $borderClass = null;
 
     public function add(
         string $title,
@@ -51,6 +53,13 @@ class StepsWithProgressBar implements Renderable
         return $this;
     }
 
+    public function textClass(StyleClassType $value): static
+    {
+        $this->textClass = $value;
+
+        return $this;
+    }
+
     public function finishedClass(StyleClassType $value): static
     {
         $this->finishedClass = $value;
@@ -72,6 +81,13 @@ class StepsWithProgressBar implements Renderable
         return $this;
     }
 
+    public function borderClass(StyleClassType $value): static
+    {
+        $this->borderClass = $value;
+
+        return $this;
+    }
+
     public function render(): string
     {
         $data['items'] = [];
@@ -88,10 +104,12 @@ class StepsWithProgressBar implements Renderable
             }
         }
 
-        $data['bg_class'] = $this->bgClass->value;
-        $data['finished_class'] = $this->finishedClass->value;
-        $data['active_class'] = $this->activeClass->value;
-        $data['disabled_class'] = $this->disabledClass->value;
+        $data['bg_class'] = $this->bgClass ? $this->bgClass->value : '';
+        $data['text_class'] = $this->textClass ? $this->textClass->value : '';
+        $data['finished_class'] = $this->finishedClass ? $this->finishedClass->value : '';
+        $data['active_class'] = $this->activeClass ? $this->activeClass->value : '';
+        $data['disabled_class'] = $this->disabledClass ? $this->disabledClass->value : '';
+        $data['border_class'] = $this->borderClass ? $this->borderClass->value : '';
 
         return view($this->view, $data)->render();
     }
