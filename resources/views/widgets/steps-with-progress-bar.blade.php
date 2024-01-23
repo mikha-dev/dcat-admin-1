@@ -1,6 +1,6 @@
 <div class="d-flex flex-lg-row flex-column align-items-stretch w-100">
     @foreach($items as $idx => $item)
-    <div class="list-group list-group-horizontal w-100 {{ $idx == 0 ? '' : 'ms-lg-2 mt-2 mt-lg-0' }}">
+    <div class="list-group list-group-horizontal w-100 {{ $idx == 0 ? 'me-lg-1' : ($idx == (count($items) - 1) ? 'ms-lg-1' : 'ms-lg-1 me-lg-1').' mt-2 mt-lg-0' }}">
 
         @if($item['href'])
         <a
