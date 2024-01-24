@@ -14,15 +14,9 @@ class UpdateManager
 {
     use Note;
 
-    /**
-     * @var Manager
-     */
-    protected $manager;
+    protected Manager $manager;
 
-    /**
-     * @var VersionManager
-     */
-    protected $versionManager;
+    protected VersionManager $versionManager;
 
     public function __construct(Manager $manager)
     {
@@ -30,17 +24,17 @@ class UpdateManager
         $this->versionManager = $manager->versionManager();
     }
 
-    public function install($extension)
+    public function install($extension) : static
     {
         return $this->update($extension);
     }
 
-    public function uninstall($extension)
+    public function uninstall($extension) : static
     {
         return $this->rollback($extension);
     }
 
-    public function rollback($name, ?string $stopOnVersion = null)
+    public function rollback($name, ?string $stopOnVersion = null) : static
     {
         if (
             ! ($extension = $this->manager->get($name))
@@ -74,14 +68,14 @@ class UpdateManager
         return $this;
     }
 
-    public function update($name, ?string $stopOnVersion = null)
+    public function update($name, ?string $stopOnVersion = null) : static
     {
         $name = $this->manager->getName($name);
 
         if (! ($extension = $this->manager->get($name))) {
             $this->note('<error>Unable to find:</error> '.$name);
 
-            return;
+            return $this;
         }
 
         $this->note($name);
@@ -93,21 +87,17 @@ class UpdateManager
         return $this;
     }
 
-    /**
-     * 发布扩展资源.
-     *
-     * @param  string  $name
-     */
-    public function publish($name)
+    public function publish(string $name) : void
     {
         $name = $this->manager->getName($name);
 
         $this->manager->get($name)->publishable();
 
         Artisan::call('vendor:publish', ['--force' => true, '--tag' => $name]);
+        Artisan::call('route:clear');
     }
 
-    protected function versionUpdate($extension, $stopOnVersion)
+    protected function versionUpdate($extension, $stopOnVersion) : void
     {
         $this->versionManager->notes = [];
         $this->versionManager->output = $this->output;
