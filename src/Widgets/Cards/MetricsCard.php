@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Dcat\Admin\Widgets\Cards;
 
+use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\Widgets\Widget;
 use Illuminate\Contracts\Support\Renderable;
 
@@ -12,6 +13,9 @@ class MetricsCard extends Widget
     protected ?string $tool = null;
     protected ?string $value = null;
     protected ?string $target = null;
+
+    protected ?StyleClassType $valueClass = null;
+    protected ?StyleClassType $titleClass = null;
 
     public function __construct(
         protected string $title,
@@ -64,6 +68,20 @@ class MetricsCard extends Widget
         return $this;
     }
 
+    public function valueClass(StyleClassType $value): static
+    {
+        $this->valueClass = $value;
+
+        return $this;
+    }
+
+    public function titleClass(StyleClassType $value): static
+    {
+        $this->titleClass = $value;
+
+        return $this;
+    }
+
     public function defaultVariables() : array
     {
         return [
@@ -74,7 +92,9 @@ class MetricsCard extends Widget
             'icon'          => $this->icon,
             'tool'          => $this->tool,
             'value'         => $this->value,
-            'target'        => $this->target
+            'target'        => $this->target,
+            'value_class'   => is_null($this->valueClass) ? '' : $this->valueClass->value,
+            'title_class'   => is_null($this->titleClass) ? '' : $this->titleClass->value
         ];
     }
 }

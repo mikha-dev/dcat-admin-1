@@ -8,7 +8,7 @@
                     @endif
                     @if ($title)
                     <div class="d-block">
-                        <small>{!! $title !!}</small>
+                        <small class="text-{{ $title_class }}">{!! $title !!}</small>
                     </div>
                     @endif
                 </div>
@@ -23,15 +23,15 @@
             </div>
             <div class="row">
                 <div class="col-5">
-                    <div class="d-flex flex-column justify-content-end h-100">
-                        <div class="pb-4">
-                            <h3 class="m-0 p-0">
-                                {!! $value !!}
-                            </h3>
-                        </div>
-                        <p class="text-muted m-0 p-0">
+                    <div class="d-flex flex-column justify-content-center h-100">
+                        <h3 class="m-0 p-0 text-{{ $value_class }}">
+                            {!! $value !!}
+                        </h3>
+                        @if($target)
+                        <p class="text-muted m-0 p-0 pt-4">
                             {!! $target !!}
                         </p>
+                        @endif
                     </div>
                 </div>
                 <div class="col-7">
