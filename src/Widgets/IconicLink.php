@@ -13,7 +13,7 @@ class IconicLink implements Renderable
     public function __construct(
         protected string $icon,
         protected string $text,
-        protected string $href,
+        protected ?string $href = null,
         protected StyleClassType $class = StyleClassType::DARK
     )
     {
