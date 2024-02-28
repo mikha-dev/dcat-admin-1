@@ -7,7 +7,6 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
 use D4T\Core\Models\Domain;
-use Dcat\Admin\Enums\HttpSchemaType;
 use Dcat\Admin\Models\Administrator;
 use Dcat\Admin\Http\Controllers\AdminController;
 
