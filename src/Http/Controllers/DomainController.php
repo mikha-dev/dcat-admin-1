@@ -2,11 +2,11 @@
 
 namespace Dcat\Admin\Http\Controllers;
 
-use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
 use D4T\Core\Models\Domain;
+use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\Models\Administrator;
 use Dcat\Admin\Http\Controllers\AdminController;
 
@@ -37,6 +37,7 @@ class DomainController extends AdminController
         return new Form( Domain::with(['manager','default_roles']), function (Form $form) {
 
             $form->text('host_base')->required();
+
 
             $users = Administrator::whereManagerId(Admin::user()->id)->pluck('username', 'id');
             $form->select('manager_id', trans('admin.manager'))->options($users)->required();
