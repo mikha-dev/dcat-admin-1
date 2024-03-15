@@ -2,12 +2,13 @@
 
 namespace Dcat\Admin\Http\Controllers;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Enums\HttpSchemaType;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
-use Dcat\Admin\Http\Controllers\AdminController;
+use Dcat\Admin\Admin;
+use D4T\Core\Models\Domain;
+use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\Models\Administrator;
+use Dcat\Admin\Http\Controllers\AdminController;
 
 class DomainController extends AdminController
 {
@@ -16,16 +17,13 @@ class DomainController extends AdminController
 
     protected function grid()
     {
-        $model = config('admin.database.domains_model');
+        return new Grid( Domain::with('manager'), function (Grid $grid) {
 
-        return new Grid( $model::with('manager'), function (Grid $grid) {
-
-            $grid->column('schema')->select(HttpSchemaType::map());
-            $grid->column('host')->editable();
+            $grid->column('host_base')->editable();
             $grid->column('manager.username', trans('admin.manager'));
 
             if (config('admin.permission.enable')) {
-                $grid->column('default_roles')->pluck('name')->label('primary', 3);
+                $grid->column('default_roles')->pluck('name')->label(StyleClassType::PRIMARY, 3);
             }
 
             $grid->disableFilterButton();
@@ -36,11 +34,10 @@ class DomainController extends AdminController
 
     protected function form()
     {
-        $model = config('admin.database.domains_model');
-        return new Form( $model::with(['manager','default_roles']), function (Form $form) {
+        return new Form( Domain::with(['manager','default_roles']), function (Form $form) {
 
-            $form->text('host')->required();
-            $form->select('schema')->options(HttpSchemaType::map())->default(HttpSchemaType::HTTPS)->required();
+            $form->text('host_base')->required();
+
 
             $users = Administrator::whereManagerId(Admin::user()->id)->pluck('username', 'id');
             $form->select('manager_id', trans('admin.manager'))->options($users)->required();

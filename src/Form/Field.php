@@ -212,8 +212,8 @@ class Field implements Renderable
      * @var array
      */
 //todo:: use css classes inside view
-//    protected $labelClass = ['text-capitalize'];
-    protected $labelClass = [];
+    protected $labelClass = ['text-capitalize'];
+//    protected $labelClass = [];
 
     /**
      * @var array
@@ -224,8 +224,8 @@ class Field implements Renderable
      * @var array
      */
 //todo::use css classes inside view
-    //protected $formGroupClass = ['form-field'];
-    protected $formGroupClass = [];
+    protected $formGroupClass = ['form-field'];
+    //protected $formGroupClass = [];
 
     /**
      * @var \Closure[]
@@ -909,8 +909,8 @@ class Field implements Renderable
                 'label'      => "col-md-{$this->width['label']} {$this->getLabelClass()}",
                 'field'      => "col-md-{$this->width['field']} {$this->getFieldClass()}",
 //todo::use css classes inside view
-//                'form-group' => "form-group row {$this->getFormGroupClass()}",
-                'form-group' => "",
+                'form-group' => "form-group row {$this->getFormGroupClass()}",
+//                'form-group' => "",
             ];
         }
 

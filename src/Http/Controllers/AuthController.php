@@ -114,7 +114,7 @@ class AuthController extends Controller
         );
 
         return $content
-            ->title(trans('admin.user_security'))
+            ->title(trans('admin.security'))
             ->body($form->edit(Admin::user()->getKey()));
     }
 
@@ -149,7 +149,7 @@ class AuthController extends Controller
         );
 
         return $content
-            ->title(trans('admin.user_profile'))
+            ->title(trans('admin.profile'))
             ->body($form->edit(Admin::user()->getKey()));
     }
 

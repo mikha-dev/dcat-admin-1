@@ -2,6 +2,7 @@
 
 namespace Dcat\Admin\Http\Actions\Menu;
 
+use Dcat\Admin\Enums\RouteAuth;
 use Dcat\Admin\Tree\RowAction;
 
 class Show extends RowAction
@@ -18,7 +19,7 @@ class Show extends RowAction
         return $this
             ->response()
             ->success(trans('admin.update_succeeded'))
-            ->location('auth/menu');
+            ->location(RouteAuth::MENU());
     }
 
     public function title()

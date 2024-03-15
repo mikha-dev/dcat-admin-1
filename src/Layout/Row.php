@@ -32,7 +32,7 @@ class Row implements Renderable
     /**
      * Add a column.
      *
-     * @param  int  $width
+     * @param  array|int  $width
      * @param $content
      */
     public function column($width, $content)

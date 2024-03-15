@@ -1,30 +1,39 @@
-<div class="card {{ $fullHeight ? 'h-100' : '' }} {{ empty($class) ? '' : 'bg-'.$class }}" style="{{ $style }}">
-    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0 pt-4">
-        @if ($icon)
-        <div class="px-4">
-            {!! $icon !!}
+<div class="card {{ $full_height ? 'h-100' : '' }} {{ empty($class) ? '' : 'bg-'.$class }}" style="{{ $style }}">
+    @if($header_content)
+        <div class="card-header">
+            {!! $header_content !!}
         </div>
+    @endif
+    <div class="card-body d-flex flex-column flex-md-row justify-content-between p-0 {{ $with_border ? 'border border-1 border-bottom-0 rounded-top border-'.$border_class : '' }}">
+        @if ($image)
+            <div class="d-inline-flex flex-column justify-content-center align-items-center ps-4">
+                <div>
+                    {!! $image !!}
+                </div>
+            </div>
         @endif
-        <div class="card-body d-flex align-items-md-left flex-column">
+        <div class="card-body d-flex align-items-left flex-column">
             @if ($title)
-            <h3 class="card-title mb-4 lh-sm text-left">
+                <p class="card-title mb-3 text-left">
                     {{ $title }}
-            </h3>
+                </p>
             @endif
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="row">
                 @foreach($features as $feature)
-                    {!! $feature !!}
+                    <div class="col-12 col-md-6 col-lg-3 py-1">
+                        {!! $feature !!}
+                    </div>
                 @endforeach
             </div>
         </div>
     </div>
-    @if(count($footerItems) > 0)
-    <div class="card-footer d-flex align-items-center justify-content-around mt-3 py-4 border-top">
-        @foreach($footerItems as $item)
-            <div class="">
-            {!! $item !!}
+    @if(count($footer_links) > 0)
+        <div class="card-footer d-flex align-items-center p-0" style="margin-top: -3px">
+            <div class="btn-group w-100">
+                @foreach($footer_links as $link)
+                    {!! $link !!}
+                @endforeach
             </div>
-        @endforeach
-    </div>
+        </div>
     @endif
 </div>

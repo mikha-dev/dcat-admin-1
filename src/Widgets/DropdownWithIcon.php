@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Dcat\Admin\Widgets;
 
+use D4T\Core\Enums\StyleClassType;
 use Dcat\Admin\DcatIcon;
 
 class DropdownWithIcon extends Widget
@@ -12,16 +13,31 @@ class DropdownWithIcon extends Widget
     /** @var DropdownItem[] $items */
     protected array $items = [];
 
-    protected string $icon;
-
+    protected string $id = '';
+    protected ?string $icon = null;
     protected string $title = '';
-
+    protected ?string $description = null;
     protected bool $click = FALSE;
 
+    protected StyleClassType $iconClass = StyleClassType::PRIMARY;
+    protected StyleClassType $btnClass = StyleClassType::SECONDARY;
+    protected StyleClassType $titleClass = StyleClassType::PRIMARY;
+    protected StyleClassType $descriptionClass = StyleClassType::PRIMARY;
+
     /** @var DropdownItem[] $items */
-    public function __construct($items = [])
+    public function __construct(
+        array $items = [],
+        string|null $id = null,
+        StyleClassType|null $class = null
+    )
     {
-        $this->icon = DcatIcon::SETTINGS();
+        if( !is_null($class) ) {
+            $this->btnClass = $class;
+        }
+
+        if( is_null($id) ) {
+            $this->id = "id-dropdown-with-icon-".md5(time().rand());
+        }
 
         $this->items($items);
 
@@ -36,16 +52,33 @@ class DropdownWithIcon extends Widget
         return $this;
     }
 
-    public function title(string $title): static
+    public function title(string $title, StyleClassType|null $class = null): static
     {
         $this->title = $title;
+
+        if( !is_null($class) ) {
+            $this->titleClass = $class;
+        }
 
         return $this;
     }
 
-    public function icon(DcatIcon $icon): static
+    public function description(string $value, StyleClassType|null $class = null): static
+    {
+        $this->description = $value;
+        if( !is_null($class) ) {
+            $this->descriptionClass = $class;
+        }
+
+        return $this;
+    }
+
+    public function icon(DcatIcon $icon, StyleClassType|null $class = null): static
     {
         $this->icon = $icon->_();
+        if( !is_null($class) ) {
+            $this->iconClass = $class;
+        }
 
         return $this;
     }
@@ -60,9 +93,15 @@ class DropdownWithIcon extends Widget
     public function render(): string
     {
         $this->addVariables([
-            'items' => $this->items,
-            'icon' => $this->icon,
-            'title' => $this->title,
+            'id'                => $this->id,
+            'items'             => $this->items,
+            'icon'              => $this->icon,
+            'icon_class'        => $this->iconClass,
+            'title'             => $this->title,
+            'title_class'       => $this->titleClass,
+            'description'       => $this->description,
+            'description_class' => $this->descriptionClass,
+            'btn_class'         => $this->btnClass,
         ]);
 
         return parent::render();

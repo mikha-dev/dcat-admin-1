@@ -1,6 +1,18 @@
 <?php
 
 return [
+    'manager' => 'Manager',
+    'security' => 'Security',
+    'profile' => 'Profile',
+    'na' => 'N/A',
+    'balance' => 'Balance',
+    'orders' => 'Orders',
+    'users' => 'Users',
+    'accounts' => 'Accounts',
+    'challenges' => 'Challenges',
+    'trading_objectives' => 'Trading Objectives',
+    'metrics' => 'Metrics',
+    'details' => 'Details',
     'email' => 'Email',
     'security' => 'Security',
     'profile' => 'Profile',

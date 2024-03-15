@@ -28,7 +28,7 @@ enum RouteAuth : string implements D4TEnum
     case ROLES = 'auth.roles';
     case PERMISSIONS = 'auth.permissions';
     case USERS = 'auth.users';
-    case MENU = 'auth.menu';
+    case MENU = 'menu';
     case DOMAINS = 'auth.domains';
     case DOMAIN_MENU = 'auth.domain_menu';
     case AUTH_LOG = 'auth.authentication-log';

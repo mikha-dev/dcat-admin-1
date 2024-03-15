@@ -1,16 +1,18 @@
 <?php
-
+declare(strict_types=1);
 namespace Dcat\Admin\Widgets\ApexCharts;
-
-use Dcat\Admin\Widgets\ApexCharts\ApexChartBase;
 
 class RadialBarChart extends ApexChartBase
 {
 
-    protected int $holowSize = 70;
+    protected int $hollowSize = 70;
     protected int $offset = 0;
     protected int $height = 380;
     protected int $fontSize = 36;
+    protected int $startAngle = -180;
+    protected int $endAngle = 180;
+    protected int $valueOffsetY = 14;
+    protected bool $showLabel = false;
 
     protected array $padding = [
         'top' => -75,
@@ -24,44 +26,72 @@ class RadialBarChart extends ApexChartBase
         parent::__construct($selector, $options);
     }
 
-    public function hollowSize(int $size): RadialBarChart
+    public function showLabel(bool $value = true): static
     {
-        $this->holowSize = $size;
+        $this->showLabel = $value;
 
         return $this;
     }
 
-    public function height(int $value): RadialBarChart
+    public function hollowSize(int $size): static
+    {
+        $this->hollowSize = $size;
+
+        return $this;
+    }
+
+    public function height(int $value): static
     {
         $this->height = $value;
 
         return $this;
     }
 
-    public function fontSize(int $px): RadialBarChart
+    public function fontSize(int $px): static
     {
         $this->fontSize = $px;
 
         return $this;
     }
 
-    public function value(int $value): RadialBarChart
+    public function value(int $value): static
     {
         $this->series([$value]);
 
         return $this;
     }
 
-    public function offset(int $value): RadialBarChart
+    public function offset(int $value): static
     {
         $this->offset = $value;
 
         return $this;
     }
 
-    public function padding(array $value): RadialBarChart
+    public function padding(array $value): static
     {
         $this->padding = $value;
+
+        return $this;
+    }
+
+    public function startAngle(int $value): static
+    {
+        $this->startAngle = $value;
+
+        return $this;
+    }
+
+    public function endAngle(int $value): static
+    {
+        $this->endAngle = $value;
+
+        return $this;
+    }
+
+    public function valueOffsetY(int $value): static
+    {
+        $this->valueOffsetY = $value;
 
         return $this;
     }
@@ -74,7 +104,6 @@ class RadialBarChart extends ApexChartBase
             'sparkline' => [
                 'enabled' => true
             ],
-            //'parentHeightOffset' => 0
         ]);
 
         $this->options([
@@ -84,18 +113,21 @@ class RadialBarChart extends ApexChartBase
             'plotOptions' => [
                 'radialBar' => [
                     'dataLabels' => [
-                        'show' => true,
+                        'show' => $this->showLabel,
                         'name' => [
-                          'show' => false,
+                            'show' => false,
                         ],
                         'value' => [
-                          'fontSize' => $this->fontSize.'px',
-                          'show' => true,
+                            'offsetY' => $this->valueOffsetY,
+                            'fontSize' => $this->fontSize.'px',
+                            'show' => true,
                         ]
                     ],
                     'hollow' => [
-                        'size' => $this->holowSize . '%',
-                    ]
+                        'size' => $this->hollowSize . '%',
+                    ],
+                    'startAngle' => $this->startAngle,
+                    'endAngle' => $this->endAngle,
                 ],
             ],
         ]);
